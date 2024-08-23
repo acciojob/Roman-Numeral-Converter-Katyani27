@@ -11,13 +11,31 @@ function convertToRoman(num) {
 
   //your code here
 
+    let romanNumeral = '';
+
+    for (let i = 0; i < 7; i += 2) {
+        let value = obj[i][1];
+        let symbol = obj[i][0];
+
+        let nextValue = obj[i + 2] ? obj[i + 2][1] : null;
+        let nextSymbol = obj[i + 2] ? obj[i + 2][0] : null;
+
+        // Check for subtractive combinations
+        if (nextValue && num >= value - nextValue) {
+            romanNumeral += nextSymbol + symbol;
+            num -= (value - nextValue);
+        } else {
+            while (num >= value) {
+                romanNumeral += symbol;
+                num -= value;
+            }
+        }
+    }
+
+    return romanNumeral;
 }
-// You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
-
-// console.log(convertToRoman(36));
 
 
+console.log(convertToRoman(36));  
 
-
-// do not edit below this line
 module.exports = convertToRoman
